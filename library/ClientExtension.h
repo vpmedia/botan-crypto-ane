@@ -41,6 +41,42 @@
 #define CLIENTEXTENSION_H
 
 //----------------------------------
+// Import Standard Headers
+//----------------------------------
+
+// Input/output
+#include "stdio.h"
+// General utilities: memory management, program utilities, string conversions, random numbers
+#include "stdlib.h"
+// Fixed-width integer types
+#include "stdint.h"
+// String handling
+#include "string.h"
+// Macros supporting type boolean
+#include "stdbool.h"
+// Common mathematics functions
+#include "math.h"
+// Sizes of basic types
+#include "limits.h"
+// Windows related helpers
+#include "windows.h"
+
+//----------------------------------
+// Import Library Headers
+//----------------------------------
+
+#include <botan/botan.h>
+#include <botan/build.h>
+#include <botan/filters.h>
+#include <botan/aes.h>
+#include <botan/arc4.h>
+#include <botan/base64.h>
+#include <botan/md5.h>
+#include <botan/rsa.h>
+#include <botan/rng.h>
+#include <botan/sha2_32.h>
+
+//----------------------------------
 //  CPP
 //----------------------------------
 
@@ -89,7 +125,7 @@ DLLIMPORT void ClientExtensionFinalizer(void* extData);
 #define LOG_ENABLED 1
 #define LOG_FILE_ENABLED 1
 #define LOG_CONSOLE_ENABLED 0
-#define LOG_FILE "C:/Work/cgs-crypt-ane.log"
+#define LOG_FILE "C:/Work/botan-crypto-ane.log"
 
 #ifdef LOG_ENABLED
     #define DEBUG_PRINT(msg) print(msg)

@@ -55,17 +55,16 @@ int main(int argc, char** argv)
     
     printf("Testing Crypto\n");    
         
-    Pipe pipe(new Fork(
-                new Chain(new Hash_Filter("CRC24"), new Hex_Encoder),
+    /*Pipe pipe(new Fork(
+                new Chain(new Hash_Filter("Adler32"), new Hex_Encoder),
                 new Chain(new Hash_Filter("CRC32"), new Hex_Encoder),
-                new Chain(new Hash_Filter("Adler32"), new Hex_Encoder)
-                ));
+                new Chain(new Hash_Filter("MD5"), new Hex_Encoder),
+                new Chain(new Hash_Filter("SHA-512"), new Hex_Encoder)
+                ));*/
 
+    Pipe pipe(new Chain(new Hash_Filter("SHA-512"), new Hex_Encoder));
     pipe.process_msg("HelloWorld");
-
-    std::cout << pipe.read_all_as_string(0) << "\n";
-    std::cout << pipe.read_all_as_string(1) << "\n";
-    std::cout << pipe.read_all_as_string(2) << "\n"; 
-        
+    std::cout << "SHA-512: " << pipe.read_all_as_string(0) << "\n";
+    
     return EXIT_SUCCESS;
 }

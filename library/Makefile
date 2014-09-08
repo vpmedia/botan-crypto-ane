@@ -61,7 +61,7 @@ build:
 # Generate DLL Resource
 	windres -i resource.rc -o resource.o
 # Compile Program
-	$(CC) $(CXXFLAGS) -I./botan/build/include/botan -DEXPORT -c dllmain.cpp ClientExtension.cpp
+	$(CC) $(CXXFLAGS) -DEXPORT -c dllmain.cpp ClientExtension.cpp -I./botan/build/include
 # Assemble DLL
 	$(CC) -o ClientExtension.dll -shared -static-libgcc -static-libstdc++ \
 	-Wl,--subsystem,windows,--output-def,ClientExtension.def,--out-implib,libClientExtension.a \

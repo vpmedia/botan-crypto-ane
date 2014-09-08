@@ -41,32 +41,11 @@
 #include "ClientExtension.h"
 
 //----------------------------------
-// Import Standard Headers
-//----------------------------------
-
-// Input/output
-#include "stdio.h"
-// General utilities: memory management, program utilities, string conversions, random numbers
-#include "stdlib.h"
-// Fixed-width integer types
-#include "stdint.h"
-// String handling
-#include "string.h"
-// Macros supporting type boolean
-#include "stdbool.h"
-// Common mathematics functions
-#include "math.h"
-// Sizes of basic types
-#include "limits.h"
-// Windows related helpers
-#include "windows.h"
-
-//----------------------------------
 // Constants
 //----------------------------------
 
 // Common
-#define EXT_MD5 1
+#define EXT_SHA_512 1
 
 //----------------------------------
 // Properties
@@ -79,6 +58,22 @@ FREContext dllContext;
 //  API
 //----------------------------------
 
+using namespace Botan;
+
+FREObject SHA_512(std::string input) { 
+    // create result
+    FREObject result = NULL;
+    // process input
+    Pipe pipe(new Chain(new Hash_Filter("SHA-512"), new Hex_Encoder));
+    pipe.process_msg(input);
+    std::string resultStr = pipe.read_all_as_string(0);
+    // process output
+    uint32_t resultLen = resultStr.length();
+    FRENewObjectFromUTF8(resultLen, (const uint8_t*)resultStr.c_str(), &result);
+    // return result
+    return result;
+}
+
 /**
  *  Global Wrapper
  *  
@@ -90,10 +85,19 @@ FREContext dllContext;
  *  @return Int32 serialized as an FREObject variable.
  */
 FREObject callNative(FREContext ctx, void* funcData, uint32_t argc, FREObject argv[]) {    
-    // TODO
-    // result
+    // get command type parameter
+    int32_t type; 
+    FREGetObjectAsInt32(argv[0], &type);
+    // get result
     FREObject result = NULL;
-    FRENewObjectFromInt32(0, &result);
+    switch (type) {
+         case EXT_SHA_512:
+            result = SHA_512("HelloWorld");  
+           break;
+         default:
+            FRENewObjectFromInt32(0, &result); 
+            break;
+    }      
     // Return result
     return result;
 }
@@ -114,6 +118,7 @@ FREObject callNative(FREContext ctx, void* funcData, uint32_t argc, FREObject ar
 void contextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctions, const FRENamedFunction** functions) {   
     // log message
     //DEBUG_PRINT("#################### contextInitializer ####################\n");
+    LibraryInitializer init;
     // define API length
     *numFunctions = 1;
     // allocate API functions by length
