@@ -102,7 +102,7 @@ public class Main extends Sprite {
             log(message);
         });
 
-        //log("HAS CPUId: " + extension.callNative(BotanCryptoExtension.EXT_HAS_CPU_ID));
+        //log("EXT_MD5: " + extension.callNative(BotanCryptoExtension.EXT_MD5));
     }
 
     /**

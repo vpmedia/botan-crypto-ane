@@ -1,13 +1,12 @@
 botan-crypto-ane
 ================
 
-Botan Cryptography Adobe AIR Native Extension
+Botan Cryptography Adobe AIR Native Extension for Windows
 
 ## Prerequisites
 
-### Adobe AIR SDK
-
-### MingW
+* Adobe AIR SDK
+* MingW
 
 ## Building
 
