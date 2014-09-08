@@ -84,15 +84,25 @@ FREObject SHA_512(std::string input) {
  *  
  *  @return Int32 serialized as an FREObject variable.
  */
-FREObject callNative(FREContext ctx, void* funcData, uint32_t argc, FREObject argv[]) {    
+FREObject callNative(FREContext ctx, void* funcData, uint32_t argc, FREObject argv[]) {
+    // result data
+    FREObject result = NULL;  
     // get command type parameter
     int32_t type; 
     FREGetObjectAsInt32(argv[0], &type);
+    // get command value parameter (string to hash/crypt)
+    uint32_t dataLen; 
+    const uint8_t* data;
+    if(argc <= 1) {
+        FRENewObjectFromInt32(-1, &result); 
+        return result;
+    }
+    FREGetObjectAsUTF8(argv[1], &dataLen, &data);  
+    std::string dataStr( data, data+dataLen );
     // get result
-    FREObject result = NULL;
     switch (type) {
          case EXT_SHA_512:
-            result = SHA_512("HelloWorld");  
+            result = SHA_512(dataStr);  
            break;
          default:
             FRENewObjectFromInt32(0, &result); 

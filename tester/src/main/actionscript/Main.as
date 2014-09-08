@@ -102,7 +102,9 @@ public class Main extends Sprite {
             log(message);
         });
 
-        //log("EXT_MD5: " + extension.callNative(BotanCryptoExtension.EXT_MD5));
+        //extension.callNative(BotanCryptoExtension.EXT_SHA_512); // returns -1 since too few parameters
+
+        extension.callNative(BotanCryptoExtension.EXT_SHA_512, "HelloWorld");
     }
 
     /**
