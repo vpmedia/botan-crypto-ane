@@ -27,4 +27,36 @@
 // =END MIT LICENSE
 //
 
-include 'android', 'extension', 'tester'
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+String AIR_HOME = System.getenv('AIR_HOME')
+String ANT_HOME = System.getenv('ANT_HOME')
+
+// apply plugin
+apply plugin: 'java'
+
+if("${System.env.JENKINS_BUILD_VERSION}" != "null") {
+    version = "${System.env.JENKINS_BUILD_VERSION}"
+}
+
+println "${group}.${project.name}-${version}"
+
+dependencies {
+    testCompile 'junit:junit:4.11'
+    compile files("${AIR_HOME}/lib/android/FlashRuntimeExtensions.jar")
+}
+
+artifacts {
+    archives jar
+}
+
+uploadArchives {
+    repositories {
+        mavenLocal() 
+    }
+}
+
+defaultTasks 'clean', 'jar'
