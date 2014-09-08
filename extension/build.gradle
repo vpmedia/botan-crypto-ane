@@ -159,9 +159,9 @@ task compile(type: JavaExec) {
     def argsList = [
                 '-directory=false',
                 '-debug=true',
-                '-include-sources="src/main/actionscript"',
-                '-output="build/Main.swc"',
-                '-load-config+="src/main/temp/.flexConfig.xml"'
+                '-include-sources=src/main/actionscript',
+                '-output=build/Main.swc',
+                '-load-config+=src/main/temp/.flexConfig.xml'
             ]
     def airConfig = "${AIR_HOME}" + '/frameworks/air-config.xml'
     def loadAirConfig = '-load-config+='+"${airConfig}";
@@ -202,7 +202,7 @@ task package_ane(type: JavaExec) {
     def argsList = [
         '-package',
         '-keystore',
-        '"../src/main/certs/gradlefx.p12"',
+        '../src/main/certs/gradlefx.p12',
         '-storetype',
         'pkcs12',
         '-storepass',
@@ -214,7 +214,7 @@ task package_ane(type: JavaExec) {
         'Main.ane',
         'extension.xml',
         '-swc',
-        '"../build/Main.swc"',
+        '../build/Main.swc',
         '-platform',
         'Windows-x86',
         'library.swf',
