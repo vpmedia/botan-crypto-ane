@@ -31,5 +31,5 @@
 @ECHO OFF & SETLOCAL
 
 SET PATH=%PATH%;%MSYS_HOME%\bin;%MINGW_HOME%\bin
-python configure.py --os=mingw --cpu=x86_32
+python configure.py --os=cygwin --cpu=x86_32 --gen-amalgamation --no-autoload --enable-modules=sha-512
 make

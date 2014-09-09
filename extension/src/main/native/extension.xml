@@ -39,6 +39,13 @@
                 <finalizer>ClientExtensionFinalizer</finalizer>
             </applicationDeployment>
         </platform>      
+        <platform name="Android-ARM">
+            <applicationDeployment>
+                <nativeLibrary>ClientExtension.jar</nativeLibrary>
+                <initializer>com.docmet.extensions.ClientExtension</initializer>
+                <finalizer>com.docmet.extensions.ClientExtension</finalizer>
+            </applicationDeployment>
+        </platform>
         <platform name="default"> 
             <applicationDeployment/> 
         </platform> 

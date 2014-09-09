@@ -35,3 +35,6 @@ cmake_install.cmake
 *.a
 *.lib
 library/html/
+
+# Dev
+crossbridge

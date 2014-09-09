@@ -70,7 +70,7 @@ build:
 test:
 	@echo "--------------------------------------------- Test --------------------------------------------"
 	$(CC) $(CXXFLAGS) -DEXPORT -c ClientExtensionTest.cpp -I./botan/build/include
-	$(CC) -o ClientExtensionTest.exe ClientExtensionTest.o -I./botan/build/include -L./. -lbotan-1.10
+	$(CC) -o ClientExtensionTest.exe -static-libgcc -static-libstdc++ ClientExtensionTest.o -I./botan/build/include -L./. -lbotan-1.10
 	./ClientExtensionTest
 
 deploy:
