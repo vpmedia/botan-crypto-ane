@@ -35,6 +35,3 @@ library/*.dll
 *.a
 *.lib
 library/html/
-
-# Dev
-crossbridge

@@ -29,7 +29,7 @@
  ~ =END MIT LICENSE
  ~
 -->
-<application xmlns="http://ns.adobe.com/air/application/14.0">
+<application xmlns="http://ns.adobe.com/air/application/15.0">
     <id>hu.cgs.ane.botancrypto.tester</id>
     <filename>BotanCryptoANETester</filename>
     <name>CGS BotanCrypto ANE Tester</name>
