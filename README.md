@@ -7,7 +7,7 @@ Botan Cryptography Adobe AIR Native Extension
 
 ## Introduction
 
-AIR Native Extension for the [Botan Crypto Library for C++](http://botan.randombit.net/)
+AIR Native Extension for the [Botan Crypto Library](http://botan.randombit.net/)
 
 ## Prerequisites
 
