@@ -27,6 +27,17 @@
 // =END MIT LICENSE
 //
 
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.+'
+    }
+}
+apply plugin: 'com.android.library'
+
 repositories {
     mavenLocal()
     mavenCentral()
@@ -36,7 +47,7 @@ String AIR_HOME = System.getenv('AIR_HOME')
 String ANT_HOME = System.getenv('ANT_HOME')
 
 // apply plugin
-apply plugin: 'java'
+apply plugin: 'android-library'
 
 if("${System.env.JENKINS_BUILD_VERSION}" != "null") {
     version = "${System.env.JENKINS_BUILD_VERSION}"
@@ -45,11 +56,20 @@ if("${System.env.JENKINS_BUILD_VERSION}" != "null") {
 println "${group}.${project.name}-${version}"
 
 dependencies {
-    testCompile 'junit:junit:4.11'
     compile files("${AIR_HOME}/lib/android/FlashRuntimeExtensions.jar")
 }
 
-artifacts {
+android {
+    compileSdkVersion 20
+    buildToolsVersion "20.0.0"
+
+    defaultConfig {
+        minSdkVersion 20
+        targetSdkVersion 20
+    }
+} 
+
+/*artifacts {
     archives jar
 }
 
@@ -57,6 +77,6 @@ uploadArchives {
     repositories {
         mavenLocal() 
     }
-}
+}*/
 
-defaultTasks 'clean', 'jar'
+//defaultTasks 'clean', 'jar'
