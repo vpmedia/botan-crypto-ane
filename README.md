@@ -38,4 +38,4 @@ AIR Native Extension for the [Botan Crypto Library](http://botan.randombit.net/)
 
 ### ANE
 
-1. run **gradle**
+1. run **gradlew**
