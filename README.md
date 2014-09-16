@@ -23,6 +23,19 @@ AIR Native Extension for the [Botan Crypto Library](http://botan.randombit.net/)
 
 ## Building
 
-* cd library/botan && build
-* cd library && build
-* gradle
+### Android
+
+1. cd android && ..\gradlew
+
+### iOS
+
+1. run **xctool** or **xcodebuild**
+
+### Windows
+
+1. cd library/cryptopp && build
+2. cd library && build
+
+### ANE
+
+1. run **gradle**

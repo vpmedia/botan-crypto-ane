@@ -67,16 +67,6 @@ android {
         minSdkVersion 20
         targetSdkVersion 20
     }
-} 
-
-/*artifacts {
-    archives jar
 }
 
-uploadArchives {
-    repositories {
-        mavenLocal() 
-    }
-}*/
-
-//defaultTasks 'clean', 'jar'
+defaultTasks 'assemble'
