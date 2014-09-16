@@ -104,7 +104,6 @@ def confDir = new File(projectDir, '/src/main/temp')
 def publishDir = new File(projectDir, '/publish')
 def reportDir = new File(projectDir, '/build/reports')
 def tempDir = new File(projectDir, '/temp')
-tempDir.mkdirs()
 def tempDirPath = tempDir.absolutePath
 
 // extra
@@ -196,6 +195,22 @@ task analyze << {
     ant.flexPmd(sourceDirectory: 'src/main/actionscript', outputDirectory: reportDir )
 }
 
+task package_init << {
+    copy {
+        from fileTree(nativeDir).files
+        into tempDir    
+    }
+    copy {
+        def swcFile = file(buildDir.absolutePath + '/Main.swc')
+        from zipTree(swcFile)
+        into tempDir    
+    }  
+    copy {
+        from '/../android/build/intermediates/bundles/release/jni'
+        into tempDir.absolutePath + '/libs'
+    }    
+}
+
 task package_ane(type: JavaExec) {
     main = 'com.adobe.air.ADT'
     classpath = files("${AIR_HOME}/lib/adt.jar")
@@ -220,6 +235,7 @@ task package_ane(type: JavaExec) {
         'Android-ARM',
         'library.swf',
         'ClientExtension.jar',
+        'libs',
         '-platform',
         'Windows-x86',
         'library.swf',
@@ -231,17 +247,6 @@ task package_ane(type: JavaExec) {
     args = argsList
 }
 
-task package_init(type: Copy) {
-    from fileTree(nativeDir).files
-    into tempDir
-}
-
-task package_unzip(type: Copy) {
-    def swcFile = file(buildDir.absolutePath + '/Main.swc')
-    from zipTree(swcFile)
-    into tempDir
-}
-
 task package_all << {
     publishDir.mkdirs()
     ant.move(file: 'temp/Main.ane', todir: publishDir)
@@ -250,8 +255,7 @@ task package_all << {
 compile_init.dependsOn copyDeps
 compile.dependsOn compile_init
 package_init.dependsOn compile
-package_unzip.dependsOn package_init
-package_ane.dependsOn package_unzip
+package_ane.dependsOn package_init
 package_all.dependsOn package_ane
 
 defaultTasks 'clean', 'package_all', 'analyze'
