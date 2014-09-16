@@ -3,7 +3,7 @@ botan-crypto-ane
 
 Botan Cryptography Adobe AIR Native Extension
 
-[![Build Status](https://travis-ci.org/vpmedia/botan-crypto-ane.png?branch=master)](https://travis-ci.org/vpmedia/botan-crypto-ane)
+[![Build Status](https://travis-ci.org/ane-community/botan-crypto-ane.png?branch=master)](https://travis-ci.org/ane-community/botan-crypto-ane)
 
 ## Prerequisites
 
