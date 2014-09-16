@@ -100,14 +100,11 @@ if("${System.env.JENKINS_BUILD_VERSION}" != "null") {
 
 def binDir = new File(projectDir, '/bin')
 def buildDir = new File(projectDir, '/build')
-def confDir = new File(projectDir, '/src/main/temp')
-def publishDir = new File(projectDir, '/publish')
 def reportDir = new File(projectDir, '/build/reports')
+def publishDir = new File(projectDir, '/publish')
 def tempDir = new File(projectDir, '/temp')
-def tempDirPath = tempDir.absolutePath
-
-// extra
-def nativeDir = new File(projectDir, '/src/main/native')
+def confDir = new File(projectDir, '/src/main/temp')
+def resourcesDir = new File(projectDir, '/src/main/resources')
 
 //----------------------------------
 //  Tasks
@@ -197,7 +194,7 @@ task analyze << {
 
 task package_init << {
     copy {
-        from fileTree(nativeDir).files
+        from fileTree(resourcesDir).files
         into tempDir    
     }
     copy {
@@ -206,9 +203,11 @@ task package_init << {
         into tempDir    
     }  
     copy {
-        from '/../android/build/intermediates/bundles/release/jni'
+        from '../android/build/intermediates/bundles/release/jni'
         into tempDir.absolutePath + '/libs'
     }    
+    ant.copy(file: '../android/build/intermediates/bundles/release/classes.jar', tofile: tempDir.absolutePath + '/ClientExtension.jar') 
+    ant.copy(file: '../library/ClientExtension.dll', tofile: tempDir.absolutePath + '/ClientExtension.dll') 
 }
 
 task package_ane(type: JavaExec) {
@@ -218,7 +217,7 @@ task package_ane(type: JavaExec) {
     def argsList = [
         '-package',
         '-keystore',
-        '../src/main/certs/gradlefx.p12',
+        '../../tester/src/main/certs/gradlefx.p12',
         '-storetype',
         'pkcs12',
         '-storepass',
