@@ -77,7 +77,9 @@ task package_all << {
         from '.'
         into new File(projectDir, '/../android/src/main/jni')
         include 'botan_all.*'
-    }
+    }    
+    ant.replace(dir: "../android/src/main/jni", token: '#define BOTAN_TARGET_OS_HAS_WIN32_GET_SYSTEMTIME', value: '')
+    ant.replace(dir: "../android/src/main/jni", token: '#define BOTAN_TARGET_OS_HAS_WIN32_VIRTUAL_LOCK', value: '')  
     exec {
         workingDir = projectDir
         executable = "${PYTHON_HOME}/python${exeExt}"
