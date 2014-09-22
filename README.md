@@ -32,7 +32,7 @@ AIR Native Extension for the [Botan Crypto Library](http://botan.randombit.net/)
 
 ## Building
 
-* run **gradlew**
+* run **gradle**
 
 ## License
 
