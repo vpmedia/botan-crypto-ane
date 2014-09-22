@@ -32,22 +32,16 @@ buildscript {
         mavenLocal()
         mavenCentral()
     }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.+'
-    }
 }
-apply plugin: 'com.android.library'
 
 repositories {
     mavenLocal()
     mavenCentral()
 }
 
-String AIR_HOME = System.getenv('AIR_HOME')
-String ANT_HOME = System.getenv('ANT_HOME')
-
-// apply plugin
-apply plugin: 'android-library'
+String MSYS_HOME = System.getenv('MSYS_HOME')
+String MINGW_HOME = System.getenv('MINGW_HOME')
+String PYTHON_HOME = System.getenv('PYTHON_HOME')
 
 if("${System.env.JENKINS_BUILD_VERSION}" != "null") {
     version = "${System.env.JENKINS_BUILD_VERSION}"
@@ -55,25 +49,18 @@ if("${System.env.JENKINS_BUILD_VERSION}" != "null") {
 
 println "${group}.${project.name}-${version}"
 
-dependencies {
-    compile files("${AIR_HOME}/lib/android/FlashRuntimeExtensions.jar")
-}
+def buildDir = new File(projectDir, '/build')
 
-android {
-    compileSdkVersion 20
-    buildToolsVersion "20.0.0"
-
-    defaultConfig {
-        minSdkVersion 20
-        targetSdkVersion 20
-        
-        ndk {
-            moduleName "MainJNI"
-            stl "stlport_shared"
-            ldLibs "log"
-            cFlags "-DBOTAN_USE_GCC_INLINE_ASM=0 -fexceptions -frtti"
-        }
+task clean << {
+    if (buildDir.isDirectory()) {
+        delete(buildDir)
     }
 }
 
-defaultTasks 'assemble'
+task package_all << {
+}
+
+task analyze << {
+}
+
+defaultTasks 'clean', 'package_all', 'analyze'

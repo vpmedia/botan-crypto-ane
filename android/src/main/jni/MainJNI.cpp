@@ -29,11 +29,16 @@
  */
 #include <string.h>
 #include <jni.h>
+
+#include <botan_all.h>
+using namespace Botan;
+
 extern "C" {
       JNIEXPORT jstring JNICALL
       Java_com_docmet_extensions_CommandCallNative_stringFromJNI
       (JNIEnv *env, jobject obj)
       {
+            // LibraryInitializer init;
             return env->NewStringUTF("Hello from C++ over JNI!");
       }
 }

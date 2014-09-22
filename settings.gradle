@@ -34,4 +34,4 @@ if (Os.isFamily(Os.FAMILY_WINDOWS)) {
     include 'ios'
 }
 
-include 'android', 'extension', 'tester'
+include 'common', 'android', 'extension', 'tester'

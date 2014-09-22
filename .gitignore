@@ -50,3 +50,4 @@ local.properties
 *.lib
 *.def
 common/Makefile
+botan_all.*
