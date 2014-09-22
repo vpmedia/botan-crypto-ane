@@ -27,6 +27,8 @@
 // =END MIT LICENSE
 //
 
+import org.apache.tools.ant.taskdefs.condition.Os
+
 apply plugin: 'cpp'
 apply plugin: 'windows-resources'
 
@@ -90,6 +92,12 @@ binaries.withType(SharedLibraryBinary) {
         linker.args '-shared', '-static-libgcc', '-static-libstdc++', '-Wl,--subsystem,windows,--output-def,ClientExtension.def,--out-implib,libClientExtension.a'
     }
 }
+
+if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+    project(":extension").afterEvaluate { 
+        extension -> extension.compile.dependsOn ':common:package_all'
+    }
+} 
 
 task package_all << {}
 package_all.dependsOn 'mainSharedLibrary'
