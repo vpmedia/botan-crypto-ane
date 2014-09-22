@@ -33,18 +33,35 @@ import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.adobe.fre.FREObject;
 
+import android.util.Log;
+
 /**
  * Global API wrapper.
  */
 public class CommandCallNative implements FREFunction  {
-    public FREObject call(FREContext ctx, FREObject[] passedArgs) {
-        System.out.println("CommandCallNative successfully called.");
-        System.out.println(stringFromJNI());
-        return null;
-    }
     
-    public native String stringFromJNI();
+    /*
+     * @private
+     */ 
+    private static final String TAG = "[CommandCallNative]";
+    
+    /*
+     * Command entry point
+     */ 
+    public FREObject call(FREContext ctx, FREObject[] passedArgs) {
+        Log.d(TAG, "CommandCallNative successfully called.");
+        Log.d(TAG, "stringFromJNI: " + stringFromJNI());
+        return null;
+    }    
       
+    /*
+     * JNI Example
+     */ 
+    public native String stringFromJNI();
+    
+    /*
+     * @private
+     */ 
     static {
         System.loadLibrary("MainJNI");
     }

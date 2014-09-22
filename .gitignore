@@ -49,3 +49,4 @@ local.properties
 *.exe
 *.lib
 *.def
+common/Makefile
