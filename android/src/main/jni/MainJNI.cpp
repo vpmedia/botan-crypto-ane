@@ -27,12 +27,23 @@
  * =END MIT LICENSE
  *
  */
+ 
+// Includes
 #include <string.h>
 #include <jni.h>
-
 #include <botan_all.h>
-using namespace Botan;
 
+// Namespaces
+using namespace Botan;
+using namespace std;
+
+// Defines
+#define EXT_SHA_512 1
+
+// Static variables
+static int IS_INITIALZED = 0;
+
+// Implementation
 extern "C" {      
       /*
        * Native call
@@ -47,8 +58,17 @@ extern "C" {
       Java_com_docmet_extensions_CommandCallNative_callNative
       (JNIEnv *env, jobject obj, jint type, jint argc, jobjectArray argv)
       {
-            // LibraryInitializer init;
-            return env->NewStringUTF("NativeCall!");
+            // initialize library
+            if(!IS_INITIALZED) {
+                LibraryInitializer init;
+                IS_INITIALZED = 1;
+            }
+            // generate hash
+            Pipe pipe(new Chain(new Hash_Filter("SHA-512"), new Hex_Encoder));
+            pipe.process_msg("Hello World");
+            string resultStr = pipe.read_all_as_string(0);
+            return env->NewStringUTF(resultStr.c_str());
+            //return env->NewStringUTF("Hello JNI++");
       }
 }
 
