@@ -106,6 +106,7 @@ public class Main extends Sprite {
         //extension.callNative(BotanCryptoExtension.EXT_SHA_512); // returns -1 since too few parameters
 
         extension.callNative(BotanCryptoExtension.EXT_SHA_512, "HelloWorld");
+        extension.callNative(BotanCryptoExtension.EXT_SHA_512, "Hello World");
     }
 
     /**

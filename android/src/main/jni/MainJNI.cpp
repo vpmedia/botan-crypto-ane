@@ -63,12 +63,23 @@ extern "C" {
                 LibraryInitializer init;
                 IS_INITIALZED = 1;
             }
+            // get input
+            jstring inputJStr;
+            string inputStr;
+            if(argc > 0) {
+                inputJStr = (jstring) env->GetObjectArrayElement(argv, 0);
+                inputStr = env->GetStringUTFChars(inputJStr, NULL);            
+            }
             // generate hash
             Pipe pipe(new Chain(new Hash_Filter("SHA-512"), new Hex_Encoder));
-            pipe.process_msg("Hello World");
+            pipe.process_msg(inputStr);
             string resultStr = pipe.read_all_as_string(0);
+            // release
+            if(argc > 0) {
+                env->ReleaseStringUTFChars(inputJStr, NULL);              
+            }
+            // return result
             return env->NewStringUTF(resultStr.c_str());
-            //return env->NewStringUTF("Hello JNI++");
       }
 }
 
