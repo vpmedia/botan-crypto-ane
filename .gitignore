@@ -33,6 +33,7 @@ bin/
 publish/
 temp/
 out/
+output/
 
 # Xcode
 build/
@@ -68,5 +69,7 @@ local.properties
 *.exe
 *.lib
 *.def
+
+# Project specific
 common/Makefile
 botan_all.*
