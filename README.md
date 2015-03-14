@@ -1,4 +1,4 @@
-botan-crypto-ane [![Build Status](https://travis-ci.org/ane-community/botan-crypto-ane.png?branch=master)](https://travis-ci.org/ane-community/botan-crypto-ane)
+botan-crypto-ane [![Build Status](https://travis-ci.org/vpmedia/botan-crypto-ane.png?branch=master)](https://travis-ci.org/vpmedia/botan-crypto-ane)
 ================
 
 AIR Native Extension for the [Botan Crypto Library](http://botan.randombit.net/)
